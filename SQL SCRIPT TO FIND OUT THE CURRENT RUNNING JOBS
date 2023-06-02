@@ -1,0 +1,15 @@
+---SQL Script to Find out which SQL Server Agent Jobs are Running at the moment---
+
+
+SELECT
+    J.Name, J.job_ID
+ ,A.run_requested_Date
+    
+FROM
+    msdb.dbo.sysjobs J 
+        INNER JOIN msdb.dbo.sysjobactivity A
+        ON (j.job_id = A.job_id)
+WHERE
+    run_Requested_date is not null 
+    AND stop_execution_date is null
+
